@@ -1,0 +1,18 @@
+.group {
+  display: flex;
+  flex-direction: column;
+  margin: 3px;
+  width: 100px;
+}
+.image {
+  margin: 3px;
+  width: 100px;
+  height: 150px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+.text {
+  color: black;
+  font-weight: 550;
+  text-align: center;
+}

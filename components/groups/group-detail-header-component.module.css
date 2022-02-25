@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  min-width: 400px;
+  font-family: sans-serif;
+  margin-bottom: 25px;
+  padding-top: 25px;
+  border-top: 1px solid black;
+}
+
+.image {
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  line-height: 2em;
+}
+
+.title {
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.info {
+}
+
+.location {
+}
+
+.members {
+}
+
+.organizer {
+}

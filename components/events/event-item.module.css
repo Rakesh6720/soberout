@@ -1,0 +1,16 @@
+.today {
+  display: flex;
+}
+
+.eventDetails {
+  margin-right: 10px;
+}
+
+.eventImage {
+  background-color: red;
+  width: 150px;
+  height: 100px;
+  border-radius: 10px;
+  margin-top: 15px;
+  margin-left: 10px;
+}
