@@ -1,0 +1,21 @@
+.unorderedList {
+  display: flex;
+  list-style-type: none;
+  text-decoration: none;
+}
+
+.unorderedList li {
+}
+
+.unorderedList li a {
+  text-decoration: none;
+  margin: 5px;
+  padding: 5px;
+}
+
+.unorderedList li a:hover {
+  background-color: red;
+  color: white;
+
+  border-radius: 5px;
+}
