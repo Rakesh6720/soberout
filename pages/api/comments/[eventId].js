@@ -2,9 +2,7 @@ import { MongoClient } from "mongodb";
 export default async function handler(req, res) {
   const eventId = req.query.eventId;
 
-  const client = await MongoClient.connect(
-    "mongodb+srv://Rakesh6720:MongoGopackers1@cluster1.o2bm8.mongodb.net/soberout?retryWrites=true&w=majority"
-  );
+  const client = await MongoClient.connect(process.env.MONGO_URI);
 
   if (req.method === "POST") {
     // add server-side validation
