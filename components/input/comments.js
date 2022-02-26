@@ -16,7 +16,7 @@ export default function Comments(props) {
           setComments(data.comments);
         });
     }
-  }, [showComments]);
+  }, [showComments, comments]);
 
   function toggleCommentsHandler() {
     setShowComments((prevStatus) => !prevStatus);

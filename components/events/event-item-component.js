@@ -13,23 +13,25 @@ export default function EventItemComponent({ event }) {
   return (
     <>
       <Link href={`/events/${event.id}`}>
-        <div className={classes.today}>
-          <div className={classes.eventDetails}>
-            <h4>{event ? event.date : "loading"}</h4>
-            <h4>{event.title}</h4>
-            <p>{event.description}</p>
-          </div>
+        <a style={{ textDecoration: "none", color: "black" }}>
+          <div className={classes.today}>
+            <div className={classes.eventDetails}>
+              <h4>{event ? event.date : "loading"}</h4>
+              <h4>{event.title}</h4>
+              <p>{event.description}</p>
+            </div>
 
-          <div className={classes.eventImage}>
-            <Image
-              className={classes.eventImage}
-              src={event.img}
-              alt={event.description}
-              width="150"
-              height="100"
-            />
+            <div className={classes.eventImage}>
+              <Image
+                className={classes.eventImage}
+                src={event.img}
+                alt={event.description}
+                width="150"
+                height="100"
+              />
+            </div>
           </div>
-        </div>
+        </a>
       </Link>
     </>
   );

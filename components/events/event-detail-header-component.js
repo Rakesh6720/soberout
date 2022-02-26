@@ -7,7 +7,6 @@ export default function EventDetailHeaderComponent({ event }) {
 
   useEffect(() => {
     const host = getUserById(event.hostId);
-    console.log(host);
     setUser(host);
   }, []);
 
