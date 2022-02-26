@@ -5,6 +5,9 @@ import { useRouter } from "next/router";
 import { getEventById } from "../../dummy-data";
 import { useEffect, useState } from "react";
 import EventDetailCardComponent from "../../components/events/event-detail-card-component";
+import CommentList from "../../components/input/comment-list";
+import NewComment from "../../components/input/new-comment";
+import Comments from "../../components/input/comments";
 
 export default function EventDetailPage(props) {
   const event = props.event;
@@ -12,6 +15,7 @@ export default function EventDetailPage(props) {
   if (!event) {
     return <p>Loading...</p>;
   }
+
   return (
     <>
       <header>
@@ -28,6 +32,7 @@ export default function EventDetailPage(props) {
       </header>
       <EventDetailHeaderComponent event={event[0]} />
       <EventDetailCardComponent event={event[0]} />
+      <Comments eventId={event[0].id} />
     </>
   );
 }
