@@ -1,15 +1,8 @@
 import EventItemComponent from "../components/events/event-item-component";
 import { useState, useEffect } from "react";
+import { MongoClient } from "mongodb";
 
-export default function Home() {
-  const [events, setEvents] = useState([]);
-
-  useEffect(() => {
-    fetch("api/events")
-      .then((response) => response.json())
-      .then((data) => setEvents(data.events));
-  }, []);
-
+export default function Home({ events }) {
   return (
     <div>
       <h1>Main Home Page</h1>
@@ -18,4 +11,18 @@ export default function Home() {
       ))}
     </div>
   );
+}
+
+export async function getStaticProps() {
+  const client = await MongoClient.connect(process.env.MONGO_URI);
+  const db = client.db();
+  const response = await db.collection("events").find().toArray();
+
+  const events = JSON.parse(JSON.stringify(response));
+
+  return {
+    props: {
+      events: events,
+    },
+  };
 }
