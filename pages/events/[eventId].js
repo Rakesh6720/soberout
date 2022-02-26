@@ -18,18 +18,6 @@ export default function EventDetailPage(props) {
 
   return (
     <>
-      <header>
-        <nav>
-          <ul>
-            <li>
-              <Link href="/">Home</Link>
-            </li>
-            <li>
-              <Link href="/events">Events</Link>
-            </li>
-          </ul>
-        </nav>
-      </header>
       <EventDetailHeaderComponent event={event[0]} />
       <EventDetailCardComponent event={event[0]} />
       <Comments eventId={event[0].id} />
