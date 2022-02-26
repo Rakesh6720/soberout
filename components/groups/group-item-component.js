@@ -12,13 +12,15 @@ export default function GroupItemComponent({
   return (
     <div className={classes.group}>
       <Link href={externalLink}>
-        <Image
-          className={classes.image}
-          src={img}
-          width="100"
-          height="150"
-          alt={title}
-        />
+        <a>
+          <Image
+            className={classes.image}
+            src={img}
+            width="100"
+            height="150"
+            alt={title}
+          />
+        </a>
       </Link>
 
       <p className={classes.text}>{title}</p>

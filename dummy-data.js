@@ -2,7 +2,7 @@ const allEvents = [
   {
     id: 1,
     date: "MON, FEB 21 @10:30 AM CST",
-    title: "Mond, Body, Spirit",
+    title: "Mind, Body, Spirit",
     description: "Chat over caffeine",
     img: "/images/spirit.jpg",
     groupId: 1,
