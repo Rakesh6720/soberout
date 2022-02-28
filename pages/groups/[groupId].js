@@ -2,10 +2,22 @@ import GroupDetailHeaderComponent from "../../components/groups/group-detail-hea
 import GroupDetailNavComponent from "../../components/groups/group-detail-nav-component";
 import GroupDetailComponent from "../../components/groups/group-detail-component";
 import PastEventsComponent from "../../components/groups/past-events-component";
-import { getGroupById } from "../../dummy-data";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
-export default function GroupDetailPage(props) {
-  const group = props.group;
+export default function GroupDetailPage() {
+  const router = useRouter();
+  const groupId = router.query.groupId;
+  const [group, setGroup] = useState();
+
+  useEffect(() => {
+    fetch("/api/groups/" + groupId)
+      .then((response) => response.json())
+      .then((data) => {
+        setGroup(...data.group);
+      });
+  }, [groupId]);
+
   if (!group) {
     return <p>No group found!</p>;
   }
@@ -18,21 +30,12 @@ export default function GroupDetailPage(props) {
 
   return (
     <>
-      <GroupDetailHeaderComponent group={group[0]} />
+      <GroupDetailHeaderComponent group={group} />
       <GroupDetailNavComponent />
       <main style={mainStyle}>
-        <GroupDetailComponent group={group[0]} />
-        <PastEventsComponent groupId={group[0].id} />
+        <GroupDetailComponent group={group} />
+        <PastEventsComponent groupId={groupId} />
       </main>
     </>
   );
-}
-
-export async function getServerSideProps(context) {
-  const groupId = context.params.groupId;
-  const group = getGroupById(groupId);
-
-  return {
-    props: { group: group },
-  };
 }

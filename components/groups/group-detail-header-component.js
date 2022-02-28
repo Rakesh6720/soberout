@@ -14,7 +14,7 @@ export default function GroupDetailHeaderComponent({ group }) {
       <div>
         <Image
           className={classes.image}
-          src={image}
+          src={group.img}
           alt={group.title}
           width="300"
           height="200"

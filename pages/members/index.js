@@ -4,10 +4,11 @@ import EventItemComponent from "../../components/events/event-item-component";
 import GroupItemComponent from "../../components/groups/group-item-component";
 import MemberGroupsComponent from "../../components/groups/member-groups-component";
 import { getAllEvents, getAllGroups } from "../../dummy-data";
+import { MongoClient } from "mongodb";
 
-export default function MemberHomePage() {
+export default function MemberHomePage({ groups }) {
   const events = getAllEvents();
-  const groups = getAllGroups();
+  // const groups = getAllGroups();
   //const { id, date, title, description, img } = events;
   return (
     <>
@@ -30,8 +31,8 @@ export default function MemberHomePage() {
           <MemberGroupsComponent>
             {groups.map((event) => (
               <GroupItemComponent
-                key={event.id}
-                id={event.id}
+                key={event._id}
+                id={event._id}
                 date={event.date}
                 title={event.title}
                 description={event.description}
@@ -65,4 +66,18 @@ export default function MemberHomePage() {
       </main>
     </>
   );
+}
+
+export async function getStaticProps() {
+  const client = await MongoClient.connect(process.env.MONGO_URI);
+  const db = client.db();
+  const results = await db.collection("groups").find().toArray();
+
+  const groups = JSON.parse(JSON.stringify(results));
+
+  return {
+    props: {
+      groups: groups,
+    },
+  };
 }

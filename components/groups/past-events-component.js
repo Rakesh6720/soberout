@@ -1,11 +1,20 @@
-import { useEffect } from "react";
-import { getAllEvents } from "../../dummy-data";
+import { useEffect, useState } from "react";
 import EventItemCardComponent from "../events/event-item-card-component";
 
 export default function PastEventsComponent({ groupId }) {
-  const allEvents = getAllEvents();
-  const groupEvents = allEvents.filter((event) => event.groupId === groupId);
+  const [groupEvents, setGroupEvents] = useState([]);
 
+  useEffect(() => {
+    fetch("/api/groups/events/" + groupId)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("past events data.events:", ...data.events);
+        setGroupEvents(...data.events);
+        console.log("past events component: ", groupEvents);
+      });
+  }, [groupId]);
+
+  console.log(groupEvents);
   const divStyle = {
     display: "flex",
     flexDirection: "column",
@@ -17,9 +26,8 @@ export default function PastEventsComponent({ groupId }) {
     <>
       <div style={divStyle}>
         <h2>Past Events</h2>
-        {groupEvents.map((event) => (
-          <EventItemCardComponent key={event.id} event={event} />
-        ))}
+
+        {groupEvents && <EventItemCardComponent event={groupEvents} />}
       </div>
     </>
   );
