@@ -24,7 +24,7 @@ export default function EventItemComponent({ event }) {
             <div className={classes.eventImage}>
               <Image
                 className={classes.eventImage}
-                src={event.img}
+                src={event.img ? event.img : "/images/tech.jpg"}
                 alt={event.description}
                 width="150"
                 height="100"

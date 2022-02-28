@@ -13,7 +13,7 @@ export default function EventItemCardComponent({ event }) {
           <div>
             <Image
               className={classes.image}
-              src={event.img}
+              src={event.img ? event.img : "/images/tech.jpg"}
               alt={event.description}
               width="150"
               height="100"

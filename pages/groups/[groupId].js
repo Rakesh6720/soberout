@@ -22,6 +22,8 @@ export default function GroupDetailPage() {
     return <p>No group found!</p>;
   }
 
+  console.log("/pages/groups/[groupId]: ", groupId);
+
   const mainStyle = {
     backgroundColor: "lightgray",
     height: "100vh",

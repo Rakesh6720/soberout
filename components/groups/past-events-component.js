@@ -10,11 +10,10 @@ export default function PastEventsComponent({ groupId }) {
       .then((data) => {
         console.log("past events data.events:", ...data.events);
         setGroupEvents(...data.events);
-        console.log("past events component: ", groupEvents);
       });
   }, [groupId]);
 
-  console.log(groupEvents);
+  console.log("past event component group events: ", groupEvents);
   const divStyle = {
     display: "flex",
     flexDirection: "column",
@@ -22,12 +21,17 @@ export default function PastEventsComponent({ groupId }) {
     fontFamily: "sans-serif",
   };
 
+  if (!groupEvents) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <>
       <div style={divStyle}>
         <h2>Past Events</h2>
 
-        {groupEvents && <EventItemCardComponent event={groupEvents} />}
+        {/* {groupEvents && <EventItemCardComponent event={groupEvents} />} */}
+        <EventItemCardComponent event={groupEvents} />
       </div>
     </>
   );
