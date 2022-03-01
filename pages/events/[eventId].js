@@ -28,7 +28,6 @@ export default function EventDetailPage(props) {
 export async function getServerSideProps(context) {
   const eventId = context.params.eventId;
   const selectedEvent = getEventById(eventId);
-  console.log(selectedEvent);
   return {
     props: { event: selectedEvent },
   };

@@ -10,7 +10,8 @@ export default async function handler(req, res) {
       .collection("groups")
       .find({ _id: ObjectId(groupId) })
       .toArray();
-    console.log("/api/groups/[groupId]: ", results);
+    console.log("/api/groups/[groupId] hostId: ", results.hostId);
+
     res.status(201).json({ group: results });
   }
 }

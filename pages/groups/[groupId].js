@@ -19,7 +19,7 @@ export default function GroupDetailPage() {
   }, [groupId]);
 
   if (!group) {
-    return <p>No group found!</p>;
+    return <p>Loading...</p>;
   }
 
   console.log("/pages/groups/[groupId]: ", groupId);
