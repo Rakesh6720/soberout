@@ -5,6 +5,13 @@ import { getEventById } from "../../dummy-data";
 import { useEffect, useState } from "react";
 
 export default function EventItemComponent({ event }) {
+  const readableDate = new Date(event.date).toLocaleDateString("en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
   if (!event) {
     console.log("loading");
     return <p>Loading...</p>;
@@ -12,11 +19,11 @@ export default function EventItemComponent({ event }) {
 
   return (
     <>
-      <Link href={`/events/${event.id}`}>
+      <Link href={`/events/${event._id}`}>
         <a style={{ textDecoration: "none", color: "black" }}>
           <div className={classes.today}>
             <div className={classes.eventDetails}>
-              <h4>{event ? event.date : "loading"}</h4>
+              <h4>{event ? readableDate : "loading"}</h4>
               <h4>{event.title}</h4>
               <p>{event.description}</p>
             </div>

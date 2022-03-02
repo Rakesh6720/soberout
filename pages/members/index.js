@@ -6,10 +6,11 @@ import MemberGroupsComponent from "../../components/groups/member-groups-compone
 import { getAllEvents, getAllGroups } from "../../dummy-data";
 import { MongoClient } from "mongodb";
 
-export default function MemberHomePage({ groups }) {
-  const events = getAllEvents();
-  // const groups = getAllGroups();
-  //const { id, date, title, description, img } = events;
+export default function MemberHomePage({ groups, events }) {
+  if (!events) {
+    return <p>Loading events...</p>;
+  }
+
   return (
     <>
       <header>
@@ -17,15 +18,6 @@ export default function MemberHomePage({ groups }) {
       </header>
       <main className={classes.main}>
         <h1>Welcome, Rakesh</h1>
-        {/* <div>
-          <h2>Your next event</h2>
-          <EventItemComponent
-            date="SAT, FEB 19 @3:00 CST"
-            title="Bowling"
-            description="Fun times for Young(ish) Adults"
-            src="/images/bowling.jpeg"
-          />
-        </div> */}
         <div>
           <h2>Your groups</h2>
           <MemberGroupsComponent>
@@ -48,10 +40,9 @@ export default function MemberHomePage({ groups }) {
           <div className={classes.today}>
             <div className={classes.todayDetails}>
               <h5>Suggested</h5>
-              {events.map((event) => {
-                if (event.date.includes("SAT, FEB 19"))
-                  return <EventItemComponent key={event.id} event={event} />;
-              })}
+              {events.map((event) => (
+                <EventItemComponent key={event._id} event={event} />
+              ))}
             </div>
           </div>
         </div>
@@ -60,7 +51,7 @@ export default function MemberHomePage({ groups }) {
           <hr />
           {events.map((event) => {
             if (event.date.includes("SUN"))
-              return <EventItemComponent key={event.id} event={event} />;
+              return <EventItemComponent key={event._id} event={event} />;
           })}
         </div>
       </main>
@@ -68,16 +59,22 @@ export default function MemberHomePage({ groups }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const client = await MongoClient.connect(process.env.MONGO_URI);
   const db = client.db();
+
   const results = await db.collection("groups").find().toArray();
 
   const groups = JSON.parse(JSON.stringify(results));
 
+  const eventResults = await db.collection("events").find().toArray();
+
+  const events = JSON.parse(JSON.stringify(eventResults));
+
   return {
     props: {
       groups: groups,
+      events: events,
     },
   };
 }

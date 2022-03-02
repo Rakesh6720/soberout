@@ -5,9 +5,19 @@ import { getUserById } from "../../dummy-data";
 export default function EventDetailHeaderComponent({ event }) {
   const [user, setUser] = useState();
 
+  const readableDate = new Date(event.date).toLocaleDateString("en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
+  console.log("event detail header comopnent: ", event);
+
   useEffect(() => {
-    const host = getUserById(event.hostId);
-    setUser(host);
+    fetch("/api/users/" + event.hostId)
+      .then((response) => response.json())
+      .then((data) => setUser(data.user));
   }, []);
 
   if (!user) {
@@ -16,7 +26,7 @@ export default function EventDetailHeaderComponent({ event }) {
 
   return (
     <div className={classes.header}>
-      <h5>{event.date}</h5>
+      <h5>{readableDate}</h5>
       <h1>{event.title}</h1>
       <div className={classes.host}>
         <div className={classes.hostLogo} />
@@ -24,7 +34,7 @@ export default function EventDetailHeaderComponent({ event }) {
           <p>Hosted by</p>
           {user ? (
             <p className={classes.hostName}>
-              {user[0].firstName} {user[0].lastName}
+              {user.firstName} {user.lastName}
             </p>
           ) : (
             <p>no user on record</p>
