@@ -40,9 +40,10 @@ export default function MemberHomePage({ groups, events }) {
           <div className={classes.today}>
             <div className={classes.todayDetails}>
               <h5>Suggested</h5>
-              {events.map((event) => (
-                <EventItemComponent key={event._id} event={event} />
-              ))}
+              {events.map((event) => {
+                if (event.date.includes("2022-02-19"))
+                  return <EventItemComponent key={event._id} event={event} />;
+              })}
             </div>
           </div>
         </div>
@@ -50,7 +51,7 @@ export default function MemberHomePage({ groups, events }) {
           <h3>Sunday, February 20</h3>
           <hr />
           {events.map((event) => {
-            if (event.date.includes("SUN"))
+            if (event.date.includes("2022-02-20"))
               return <EventItemComponent key={event._id} event={event} />;
           })}
         </div>
