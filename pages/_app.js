@@ -1,9 +1,13 @@
 import NavBarComponent from "../components/layout/nav-bar-component";
-function MyApp({ Component, pageProps }) {
+import { SessionProvider } from "next-auth/react";
+
+function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   return (
-    <NavBarComponent>
-      <Component {...pageProps} />
-    </NavBarComponent>
+    <SessionProvider session={session}>
+      <NavBarComponent>
+        <Component {...pageProps} />
+      </NavBarComponent>
+    </SessionProvider>
   );
 }
 

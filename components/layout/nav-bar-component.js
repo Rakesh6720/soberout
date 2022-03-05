@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Head from "next/head";
+import AuthComponent from "../auth/auth-component";
 import classes from "./nav-bar-component.module.css";
 export default function NavBarComponent(props) {
   return (
@@ -10,7 +11,7 @@ export default function NavBarComponent(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header>
-        <nav>
+        <nav className={classes.nav}>
           <ul className={classes.unorderedList}>
             <li>
               <Link href="/">
@@ -24,6 +25,9 @@ export default function NavBarComponent(props) {
               <Link href="/members">Members</Link>
             </li>
           </ul>
+          <div className={classes.auth}>
+            <AuthComponent />
+          </div>
         </nav>
       </header>
       <main>{props.children}</main>

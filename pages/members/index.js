@@ -1,10 +1,10 @@
-import classes from "./index.module.css";
-import Image from "next/image";
+import { MongoClient } from "mongodb";
+
 import EventItemComponent from "../../components/events/event-item-component";
 import GroupItemComponent from "../../components/groups/group-item-component";
 import MemberGroupsComponent from "../../components/groups/member-groups-component";
-import { getAllEvents, getAllGroups } from "../../dummy-data";
-import { MongoClient } from "mongodb";
+
+import classes from "./index.module.css";
 
 export default function MemberHomePage({ groups, events }) {
   if (!events) {
