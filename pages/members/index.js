@@ -1,5 +1,7 @@
 import { MongoClient } from "mongodb";
-
+import { useSession } from "next-auth/react";
+import { useState } from "react";
+import { useEffect } from "react";
 import EventItemComponent from "../../components/events/event-item-component";
 import GroupItemComponent from "../../components/groups/group-item-component";
 import MemberGroupsComponent from "../../components/groups/member-groups-component";
@@ -7,8 +9,22 @@ import MemberGroupsComponent from "../../components/groups/member-groups-compone
 import classes from "./index.module.css";
 
 export default function MemberHomePage({ groups, events }) {
+  const { data: session, status } = useSession();
+  console.log(session);
+  const [user, setUser] = useState("");
+
+  useEffect(() => {
+    if (session && status === "authenticated") {
+      setUser(session.user);
+    }
+  }, [status]);
+
   if (!events) {
     return <p>Loading events...</p>;
+  }
+
+  if (!session) {
+    return <p>You must be logged in to view this page.</p>;
   }
 
   return (
@@ -17,7 +33,7 @@ export default function MemberHomePage({ groups, events }) {
         <h1 className={classes.header}> meetup</h1>
       </header>
       <main className={classes.main}>
-        <h1>Welcome, Rakesh</h1>
+        <h1>Welcome, {user.name}</h1>
         <div>
           <h2>Your groups</h2>
           <MemberGroupsComponent>
