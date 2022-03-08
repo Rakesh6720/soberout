@@ -17,7 +17,7 @@ export default function MemberHomePage({ groups, events }) {
     if (session && status === "authenticated") {
       setUser(session.user);
     }
-  }, [status]);
+  }, [session, status]);
 
   if (!events) {
     return <p>Loading events...</p>;
