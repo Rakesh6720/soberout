@@ -2,7 +2,12 @@ import Link from "next/link";
 import Head from "next/head";
 import AuthComponent from "../auth/auth-component";
 import classes from "./nav-bar-component.module.css";
+import { useSession } from "next-auth/react";
+
 export default function NavBarComponent(props) {
+  const { data: session, status } = useSession();
+
+  console.log(session);
   return (
     <>
       <Head>
@@ -24,6 +29,11 @@ export default function NavBarComponent(props) {
             <li>
               <Link href="/members">Members</Link>
             </li>
+            {session && (
+              <li>
+                <Link href={`/members/${session.id}`}>Profile</Link>
+              </li>
+            )}
           </ul>
           <div className={classes.auth}>
             <AuthComponent />

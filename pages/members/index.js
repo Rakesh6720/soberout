@@ -33,7 +33,11 @@ export default function MemberHomePage({ groups, events }) {
         <h1 className={classes.header}> meetup</h1>
       </header>
       <main className={classes.main}>
-        <h1>Welcome, {user.name}</h1>
+        {user.name ? (
+          <h1>Welcome, {user.name}</h1>
+        ) : (
+          <h1>Welcome, {user.email}</h1>
+        )}
         <div>
           <h2>Your groups</h2>
           <MemberGroupsComponent>
