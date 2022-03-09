@@ -10,7 +10,7 @@ import classes from "./index.module.css";
 
 export default function MemberHomePage({ groups, events }) {
   const { data: session, status } = useSession();
-  console.log(session);
+
   const [user, setUser] = useState("");
 
   useEffect(() => {

@@ -7,7 +7,6 @@ import { useSession } from "next-auth/react";
 export default function NavBarComponent(props) {
   const { data: session, status } = useSession();
 
-  console.log(session);
   return (
     <>
       <Head>
