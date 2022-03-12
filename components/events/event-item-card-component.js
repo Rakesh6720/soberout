@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import classes from "./event-item-card-component.module.css";
 export default function EventItemCardComponent({ event }) {
@@ -21,7 +22,7 @@ export default function EventItemCardComponent({ event }) {
           </div>
         </div>
         <div id="attendees">
-          <p>12 attendees</p>
+          <p>{event.attendees.length} attendees</p>
         </div>
       </div>
     </>

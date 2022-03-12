@@ -33,7 +33,7 @@ export default function GroupDetailPage() {
   return (
     <>
       <GroupDetailHeaderComponent group={group} />
-      <GroupDetailNavComponent />
+      <GroupDetailNavComponent group={group} />
       <main style={mainStyle}>
         <GroupDetailComponent group={group} />
         <PastEventsComponent groupId={groupId} />

@@ -7,7 +7,10 @@ export default function GroupDetailHeaderComponent({ group }) {
   const [host, setHost] = useState("");
 
   useEffect(() => {
-    setImage(group.img);
+    if (group.img) {
+      setImage(group.img);
+    }
+
     fetch("/api/users/" + group.hostId)
       .then((response) => response.json())
       .then((data) => setHost(data.user));
@@ -18,7 +21,7 @@ export default function GroupDetailHeaderComponent({ group }) {
       <div>
         <Image
           className={classes.image}
-          src={group.img}
+          src={image}
           alt={group.title}
           width="300"
           height="200"

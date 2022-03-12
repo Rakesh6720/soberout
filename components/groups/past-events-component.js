@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import EventItemCardComponent from "../events/event-item-card-component";
 
 export default function PastEventsComponent({ groupId }) {
-  const [groupEvents, setGroupEvents] = useState([]);
+  const [groupEvents, setGroupEvents] = useState();
 
   useEffect(() => {
     fetch("/api/groups/events/" + groupId)
@@ -11,7 +11,7 @@ export default function PastEventsComponent({ groupId }) {
         console.log("past events data.events:", ...data.events);
         setGroupEvents(...data.events);
       });
-  }, [groupId]);
+  }, []);
 
   console.log("past event component group events: ", groupEvents);
   const divStyle = {
@@ -32,6 +32,9 @@ export default function PastEventsComponent({ groupId }) {
 
         {/* {groupEvents && <EventItemCardComponent event={groupEvents} />} */}
         <EventItemCardComponent event={groupEvents} />
+        {/* {groupEvents.map((event) => (
+          <EventItemCardComponent key={event._id} event={event} />
+        ))} */}
       </div>
     </>
   );
