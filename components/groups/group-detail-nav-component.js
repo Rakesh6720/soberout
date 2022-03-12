@@ -6,17 +6,15 @@ export default function GroupDetailNavComponent({ group }) {
   const router = useRouter();
   const params = router.query.groupId;
   console.log(params);
+  console.log(group);
   return (
     <div className={classes.container}>
-<<<<<<< Updated upstream
-      
-=======
       <ul className={classes.nav}>
         <li>
-          <a href={`/groups/${group._id}`}>About</a>
+          <a href="#">About</a>
         </li>
         <li>
-          <a href={`/groups/${params}/events`}>Events</a>
+          <a href="#">Events</a>
         </li>
         <li>
           <a href="#">Members</a>
@@ -28,7 +26,6 @@ export default function GroupDetailNavComponent({ group }) {
           <a href="#">Discussions</a>
         </li>
       </ul>
->>>>>>> Stashed changes
     </div>
   );
 }
