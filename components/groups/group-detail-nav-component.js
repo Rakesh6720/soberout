@@ -1,19 +1,14 @@
+import { useRouter } from "next/router";
+import { Link } from "next/link";
 import classes from "./group-detail-nav-component.module.css";
 
 export default function GroupDetailNavComponent() {
+  const router = useRouter();
+  const params = router.query.groupId;
+  console.log(params);
   return (
     <div className={classes.container}>
-      <ul className={classes.nav}>
-        <li>About</li>
-        <li>Events</li>
-        <li>Members</li>
-        <li>Photos</li>
-        <li>Discussions</li>
-        <li>More</li>
-        <li>
-          <button className={classes.btn}>You're a member</button>
-        </li>
-      </ul>
+      
     </div>
   );
 }
