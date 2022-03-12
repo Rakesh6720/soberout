@@ -1,35 +1,33 @@
 import EventItemCardComponent from "../../components/events/event-item-card-component";
+import { MongoClient, ObjectId } from "mongodb";
 
-const EVENTS = [
-  {
-    id: 1,
-    title: "Founders Keepers",
-    description: "Do the damng thing, Gina",
-    date: "2022-03-22",
-    img: "",
-  },
-  {
-    id: 2,
-    title: "The Douche Makers",
-    description: "We make the douches that run the world",
-    date: "2022-04-22",
-    img: "",
-  },
-  {
-    id: 3,
-    title: "The Makers Mark",
-    description: "Create with the creators of the town",
-    date: "2022-05-15",
-    img: "",
-  },
-];
+export default function GroupEventsPage({ events }) {
+  console.log(events);
 
-export default function GroupEventsPage() {
   return (
     <>
-      {EVENTS.map((event) => (
-        <EventItemCardComponent key={event.id} event={event} />
+      {events.map((event) => (
+        <EventItemCardComponent key={event._id} event={event} />
       ))}
     </>
   );
+}
+
+export async function getServerSideProps(context) {
+  const [groupId, slug] = context.query.events;
+  console.log(groupId);
+
+  const client = await MongoClient.connect(process.env.MONGO_URI);
+  const db = client.db();
+  const results = await db
+    .collection("events")
+    .find({ groupId: ObjectId(groupId) })
+    .toArray();
+
+  const events = JSON.parse(JSON.stringify(results));
+  console.log(events);
+
+  return {
+    props: { events },
+  };
 }
